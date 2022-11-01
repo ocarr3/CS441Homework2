@@ -1,0 +1,3 @@
+[submodule "ScalaPB"]
+	path = ScalaPB
+	url = https://github.com/ocarr3/CS441HW2.git
