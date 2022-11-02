@@ -21,6 +21,7 @@ After cloning the project into Intellij everything should compile with no issue 
 
 In this folder are the two main scala files relevant to running the project: lambdaQueryServer.scala and main.scala.
 The client and server applications can be run in two different ways:
+
 Method 1:
 - Using two different terminals and sbt, by using the 'sbt run' command user is asked for to input the number option 1 or 2 after compiling. 1 being the option for the   server and 2 being the option for the client. 
 - In the first terminal the user can just use 'sbt run' and select option 1 for the server to begin listening. Then in another terminal start the client with its         arguments. sbt will ask the user to start another server you can just enter y for yes. 
@@ -35,13 +36,24 @@ Both clients take in two arguments for their input when you run them, a simple w
 For example: sbt "run 05:30:00.000 00:30:00.000" will result in the lambda function searching with the interval 5:30:00.000 - 06:00:00.000.
 
 
-# mainRun (src/main/scala/mainRun)
-The main Scala object that creates instances of the MapReduceProgram tasks and runs their Map and Reduce job with the use of the logger to confirm succesful job completions.
+# ScalaRESTful @ 4d0732c Scala client for sending RESTful requests to the lambda function
+This a simple client that uses Requests to invoke the lambda function.
 
-# Running the program in mainRun -> main
-The function takes in two command line arguments: first one as the input directory for the tasks and the second as the output directory.
-If you would run with sbt it would look like this: sbt "run inputDirectory outputDirectory" (quotes inclduded). An example using content root inside the program:
-> sbt "run src/main/resources/input src/main/resources/output"
+Running the program:
+
+To run the program use the terminal window and sbt in this fashion: sbt "run (lower bound time stamp) (time stamp to add)" these two time stamps will be added to the payload in the lambda invocation and used for the binary search for the initial time stamp inside the files and searching log entries up to the end of the interval. The lambda function then hashes these srtings and adds them to an array for viewing inside the client.
+
+# AWS Lambda Function lambda-time-bool-HelloWorldFunction-tb771VCpj6ps-199bd374-171c-4c75-bb63-c88664547bda (excuse the long name)
+This is the lambda function that returns whether log files exist for the given interval inside the ScalaPB client and server porgram. Written in python it checks for 
+the first and last entry of the logs to see if searching for logs with the other lambda function is even worth the effort. If the bool entry in its return is false the given interval is not an interval that exists within the boundaries of the logs within the S3 bucket.
+
+# AWS Lambda function lambda-search-HelloWorldFunction-VGihJwpwtrGE-02134740-997f-4072-bf13-eb7bd3fba5aa
+This lambda function searches the given time interval for log entries with a generated string that match the regex pattern. Also written in Python the function uses binary search to find the correct index for the starting interval within a created ordered hash table using the log entries ordered by datew. The generated strings of the log entries ares searched for a matching regex pattern. These string then are md5 hashed and grouped into an array and sent back in the function's return. Just as before it is important for the lambda function to have the correct permissions to access the S3 bucket.
+
+S3_BUCKET and S3_PREFIX are two important variables that must be changed if one wanted to use the lambda function with another S3 bucket. Change the S3_BUCKET value to your buckets name and given the lambda function has the correct permissions to access the S3 bucket it should run. S3_PREFIX is a value one can use if they only want to work with files that start with a certain string in their name 
+
+An example of running this client would be sbt "run 09:00:00.000 01:00:00.000" these two time stamps will be sent to the lambda function for it to process logs within
+09:00:00.000 and 10:00:00.000 and succesful matches with the regex pattern will be hashes and returned.
 
 Editing the run configurations for Intellij allows you to add command line arguments allowing you to run the program this way as well
 
