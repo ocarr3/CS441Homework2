@@ -23,15 +23,15 @@ In this folder are the two main scala files relevant to running the project: lam
 The client and server applications can be run in two different ways:
 
 Method 1:
-- Using two different terminals and sbt, by using the 'sbt run' command user is asked for to input the number option 1 or 2 after compiling. 1 being the option for the   server and 2 being the option for the client. 
-- In the first terminal the user can just use 'sbt run' and select option 1 for the server to begin listening. Then in another terminal start the client with its         arguments. sbt will ask the user to start another server you can just enter y for yes. 
-- An example of this would be sbt "run 17:00:00.000 01:00:00.000" and selecting option 2 this passes the time stamps to the client for it to send to the server the n   inside the server send the time stamps to the lambda function for it to check the interval 17:00:00.000 - 18:00:00.000. The return message from the log function can   be seen in a log messsage inside the terminal you invoked the client in.
+- Using two different terminals and sbt, by using the 'sbt run' command the user is asked for to input the number option 1 or 2 after compiling. 1 being the option for the server and 2 being the option for the client. 
+- In the first terminal the user can just use 'sbt run' and select option 1 for the server to start up and begin listening. Then in another terminal start the client with its arguments. sbt will ask the user to start another server you can just enter y for yes. 
+- An example of this would be sbt "run 17:00:00.000 01:00:00.000" and selecting option 2 this passes the time stamps to the client for it to send to the server then   inside the server send the time stamps to the lambda function for it to check the interval 17:00:00.000 - 18:00:00.000. The return message from the log function can   be seen in a log messsage inside the terminal you invoked the client in.
 
 Method 2: 
 - When importing the project to Intellij a default run configuration should be created in lambdaQueryServer.scala at the beggining of the objects definition clicking on it will start the server inside the Run window.
 - Then for the client to process is the same as above. Opening a terminal and running sbt "run (lower bound time stamp) (time stamp to add)" and selecting option 2 will run the client program and connect to the server if it is running. 
 
-Some clarification for inputs and arguements just in case (relevent to both lambda function):
+Some clarification for inputs and arguements just in case (relevent to both lambda functions):
 Both clients take in two arguments for their input when you run them, a simple way to write this in is sbt "run (lower time to begin at) (time to add to stop at)".
 For example: sbt "run 05:30:00.000 00:30:00.000" will result in the lambda function searching with the interval 5:30:00.000 - 06:00:00.000.
 
@@ -48,8 +48,9 @@ This is the lambda function that returns whether log files exist for the given i
 the first and last entry of the logs to see if searching for logs with the other lambda function is even worth the effort. If the bool entry in its return is false the given interval is not an interval that exists within the boundaries of the logs within the S3 bucket.
 
 # AWS Lambda function lambda-search-HelloWorldFunction-VGihJwpwtrGE-02134740-997f-4072-bf13-eb7bd3fba5aa
-This lambda function searches the given time interval for log entries with a generated string that match the regex pattern. Also written in Python the function uses binary search to find the correct index for the starting interval within a created ordered hash table using the log entries ordered by datew. The generated strings of the log entries ares searched for a matching regex pattern. These string then are md5 hashed and grouped into an array and sent back in the function's return. Just as before it is important for the lambda function to have the correct permissions to access the S3 bucket.
+This lambda function searches the given time interval for log entries with a generated string that match the regex pattern. Also written in Python the function uses binary search to find the correct index for the starting interval within a created ordered hash table using the log entries ordered by datew. The generated strings of the log entries are searched for a matching regex pattern. These string then are md5 hashed and grouped into an array and sent back in the function's return. Just as before it is important for the lambda function to have the correct permissions to access the S3 bucket.
 
+# Lambda Configurations and Testing
 S3_BUCKET and S3_PREFIX are two important variables that must be changed if one wanted to use the lambda function with another S3 bucket. Change the S3_BUCKET value to your buckets name and given the lambda function has the correct permissions to access the S3 bucket it should run. S3_PREFIX is a value one can use if they only want to work with files that start with a certain string in their name. For our purposes it was "Log" as all the log files began wit this and were the target files to be read in.
 
 Also included are the .zip files for these lambda functions, with this one can upload to their own lambda functions and test them. Just ensure the functions have the proper access to S3 buckets.
