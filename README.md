@@ -13,7 +13,7 @@ Logger in logback.xml used for logging in both programs
 # Utility Objects HelperUtils (src/main/scala/HelperUtils)
 Using the CreateLogger and ObtainConfig reference for grabbing configuarition values and logging program activities.
 
-# ScalaPB gRPC Client Server (ScalaPB @ a457939)
+# ScalaPB gRPC Client Server (ScalaPB @ a457939) for checking if logs exist
 Here I have the project for gRPC client server that uses ScalaPB and protobufs to communicate.
 After cloning the project into Intellij everything should compile with no issue running 'sbt compile' after opening up the terminal.
 
@@ -28,7 +28,11 @@ Method 1:
 
 Method 2: 
 - When importing the project to Intellij a default run configuration should be created in lambdaQueryServer.scala at the beggining of the objects definition clicking on it will start the server inside the Run window.
-- Then for the client to process is the same as above. Opening a terminal and running sbt "run (lower bound time stamp) (time stamp to add)" will run the client program and connect to the server if it is running. 
+- Then for the client to process is the same as above. Opening a terminal and running sbt "run (lower bound time stamp) (time stamp to add)" and selecting option 2 will run the client program and connect to the server if it is running. 
+
+Some clarification for inputs and arguements just in case (relevent to both lambda function):
+Both clients take in two arguments for their input when you run them, a simple way to write this in is sbt "run (lower time to begin at) (time to add to stop at)".
+For example: sbt "run 05:30:00.000 00:30:00.000" will result in the lambda function searching with the interval 5:30:00.000 - 06:00:00.000.
 
 
 # mainRun (src/main/scala/mainRun)
