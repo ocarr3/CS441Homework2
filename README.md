@@ -21,9 +21,14 @@ After cloning the project into Intellij everything should compile with no issue 
 
 In this folder are the two main scala files relevant to running the project: lambdaQueryServer.scala and main.scala.
 The client and server applications can be run in two different ways:
+Method 1:
 - Using two different terminals and sbt, by using the 'sbt run' command user is asked for to input the number option 1 or 2 after compiling. 1 being the option for the   server and 2 being the option for the client. 
-- In the first terminal the user can just use 'sbt run' and select option 1 for the server to begin listening. Then in another terminal start the client with its         arguments. 
+- In the first terminal the user can just use 'sbt run' and select option 1 for the server to begin listening. Then in another terminal start the client with its         arguments. sbt will ask the user to start another server you can just enter y for yes. 
 - An example of this would be sbt "run 17:00:00.000 01:00:00.000" and selecting option 2 this passes the time stamps to the client for it to send to the server the n   inside the server send the time stamps to the lambda function for it to check the interval 17:00:00.000 - 18:00:00.000. The return message from the log function can   be seen in a log messsage inside the terminal you invoked the client in.
+
+Method 2: 
+- When importing the project to Intellij a default run configuration should be created in lambdaQueryServer.scala at the beggining of the objects definition clicking on it will start the server inside the Run window.
+- Then for the client to process is the same as above. Opening a terminal and running sbt "run (lower bound time stamp) (time stamp to add)" will run the client program and connect to the server if it is running. 
 
 
 # mainRun (src/main/scala/mainRun)
