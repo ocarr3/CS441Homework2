@@ -69,10 +69,10 @@ Test configurations inside the AWS lambda code testing IDE look like this:
 # Tests (src/test/scala/lambdaTimeIntervalPresentTests.scala) ScalaPB gRPC Client Server (ScalaPB @ a457939)
 Tests for logic used inside of the lambda functions
 # Resources
-https://www.youtube.com/watch?v=DA3hlLxTl-8
-https://scalapb.github.io/docs/grpc/
-https://www.baeldung.com/scala/rest-with-requests-scala
-https://www.gcptutorials.com/post/how-to-read-files-from-s3-using-python-aws-lambda
-https://www.youtube.com/watch?v=uFsaiEhr1zs
+- https://www.youtube.com/watch?v=DA3hlLxTl-8
+- https://scalapb.github.io/docs/grpc/
+- https://www.baeldung.com/scala/rest-with-requests-scala
+- https://www.gcptutorials.com/post/how-to-read-files-from-s3-using-python-aws-lambda
+- https://www.youtube.com/watch?v=uFsaiEhr1zs
 
 
