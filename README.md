@@ -10,14 +10,21 @@ It also allows for the passing of parameters that change the task's behavior:
 
 Logger in logback.xml used for logging in both programs
 
-# Utility Objects HW1Utils (src/main/scala/HW1Utils)
-Adding configruation files and my own logger meant that I had to create objects for fetching them just like is already done for LogFileGenerator. I needed to create a logger, obtain the reference for the config files and have an object fetch the paramters for the program as requested. 
+# Utility Objects HelperUtils (src/main/scala/HelperUtils)
+Using the CreateLogger and ObtainConfig reference for grabbing configuarition values and logging program activities.
 
-The logger creation and obtaining the config reference is very similar the biggest difference in these files is using HW1Params. This returns a whole new set of parameters. 
-An example of using the input directory for task 1 is: HW1Params.inputPathTask1.
 
-# MapReduceProgtamTask(1-4) (src/main/scala/HW1Utils)
-Each of the four tasks from the asssignment has their own Scala class with a unique Mapper and Reducer job associated to the task's goal. With Sort being another Mapper set to take MapReduceProgramTask2's output and sort it. 
+
+# ScalaPB gRPC Client Server (ScalaPB @ a457939)
+Here I have the project for gRPC client server that uses ScalaPB and protobufs to communicate.
+After cloning the project into Intellij everything should compile with no issue running 'sbt compile' after opening up the terminal.
+
+(src/main/scala)
+
+In this folder are the two main scala files relevant to running the project: lambdaQueryServer.scala and main.scala.
+The client and server applications can be run in two different ways:
+- Using two different terminals and sbt, by using the 'sbt run' command user is asked for to input the number option 1 or 2 after compiling. 1 being the option for the   server and 2 being the option for the client. In the first terminal the user can just use 'sbt run' and select option 1 for the server to begin listening. Then in       another terminal start the client with its arguments. An example of this would be sbt "run 17:00:00.000 01:00:00.000" this passes the time stamps to the client for it   to send to the server then inside the server send the time stamps to the lambda function for it to check the interval 17:00:00.000 - 18:00:00.000. The return message   from the log function can be seen in a log messsage inside the terminal you invoked the client in.
+
 
 # mainRun (src/main/scala/mainRun)
 The main Scala object that creates instances of the MapReduceProgram tasks and runs their Map and Reduce job with the use of the logger to confirm succesful job completions.
