@@ -23,12 +23,7 @@ Grading Criteria:
  - the documentation exists but it is insufficient to understand your program design and models and how you assembled and deployed all components of your solution: up to 15% lost;
 	* documentation present: -0%
 
-Total Grade: 0%
+Total Grade: 15%
 Comments:
 
-The ScalaAkkagRPC, ScalaPB, ScalaRESTful submodules not present
-
-https://github.com/ocarr3/CS441HW2.git
-https://github.com/ocarr3/ScalaSimpleRest.git
-
-There isn't code present in the above links. Or maybe I don't have the right permissions to view it.
+Everything is thorough. Keep it up!
